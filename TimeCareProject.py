@@ -87,3 +87,6 @@ def SchemaBuilder(data):
 
 Schema = SchemaBuilder(df)
 print(Schema)
+
+''' Kvar att göra:
+    Olika typer av träningspass'''
