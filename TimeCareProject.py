@@ -27,8 +27,9 @@ for c in events:
 
     if event_type == "Sport":
             changing_time = c.find('time/changing_time').text
+            shower_time = c.find('time/shower_time').text
             event_startTime -= datetime.timedelta(minutes=int(changing_time))
-            event_endTime += datetime.timedelta(minutes=int(changing_time))
+            event_endTime += datetime.timedelta(minutes=int(shower_time))
 
     df = df.append({'Type': event_type,'StartTime':  event_startTime,'EndTime' : event_endTime, 'Reminder':reminder}, ignore_index=True)
 
@@ -41,29 +42,27 @@ def SchemaBuilder(data):
     for num in range(data.shape[0]):
         inserted = False
         if data.iloc[num].Type == "Friends":
-            print(data.iloc[num].Type)
             for i in range(Schema.shape[0]):
                 if data.iloc[num].StartTime >= Schema.iloc[i].StartTime  and  data.iloc[num].StartTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
                     if Schema.iloc[i].Type== "Work":
                         if Schema.iloc[i].EndTime < data.iloc[num].EndTime:
-                            print(Schema.iloc[i].EndTime)
                             data.set_value(num,'StartTime',Schema.iloc[i].EndTime)
                             Schema = Schema.append(data.iloc[num], ignore_index=True)
                             inserted = True
-                            continue
+                        else:
+                            inserted = True
 
                     elif Schema.iloc[i].Type == "Friends":
-                            inserted = True
+                        inserted = True
 
                     elif Schema.iloc[i].Type == "Sport":
                         Schema.drop(Schema.index[i])
                         Schema = Schema.append(data.iloc[num], ignore_index=True)
                         inserted = True
-                        continue
 
         elif data.iloc[num].Type == "Sport" or data.iloc[num].Type == "Work":
             for i in range(Schema.shape[0]):
-                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
+                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].StartTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
                     inserted = True
 
         if inserted == False:

@@ -83,6 +83,16 @@
   <Event>
     <event_type>Friends</event_type>
     <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-07-09T09:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+
+
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
       <event_length>360</event_length>
       <event_startTime>2017-07-01T12:10</event_startTime>
     </time>
@@ -135,6 +145,7 @@
       <event_length>60</event_length>
       <event_startTime>2017-07-01T15:10</event_startTime>
       <changing_time>15</changing_time>
+      <shower_time>15</shower_time>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -145,6 +156,7 @@
       <event_length>60</event_length>
       <event_startTime>2017-07-02T22:10</event_startTime>
       <changing_time>10</changing_time>
+      <shower_time>15</shower_time>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -155,6 +167,7 @@
       <event_length>60</event_length>
       <event_startTime>2017-07-05T17:30</event_startTime>
       <changing_time>10</changing_time>
+      <shower_time>15</shower_time>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -165,6 +178,7 @@
       <event_length>60</event_length>
       <event_startTime>2017-07-07T17:30</event_startTime>
       <changing_time>10</changing_time>
+      <shower_time>15</shower_time>
     </time>
     <reminder>10</reminder>
   </Event>
