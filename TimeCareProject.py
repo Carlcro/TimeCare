@@ -43,6 +43,7 @@ def SchemaBuilder(data):
 
     #start insert other events
     for num in range(data.shape[0]):
+        inserted = False
         if data.iloc[num].Type == "Friends":
             for i in range(Schema.shape[0]):
                 if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
@@ -50,21 +51,23 @@ def SchemaBuilder(data):
                         if Schema.iloc[i].EndTime <= data.iloc[num].EndTime:
                             df.set_value(num,'StartTime',Schema.iloc[i].EndTime )
                             Schema = Schema.append(data.iloc[num], ignore_index=True)
+                            inserted = True
                             continue
 
                     elif Schema.iloc[i].Type == "Sport":
                         Schema.drop(Schema.index[i])
                         Schema = Schema.append(data.iloc[num], ignore_index=True)
+                        inserted = True
+
                         continue
 
-
-
-        elif data.iloc[num].Type == "Sport":
+        elif data.iloc[num].Type == "Sport" or data.iloc[num].Type == "Work":
             for i in range(Schema.shape[0]):
                 if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
-                    pass
-                else:
-                    Schema = Schema.append(data.iloc[num], ignore_index=True)
+                    inserted = True
+
+        if inserted == False:
+            Schema = Schema.append(data.iloc[num], ignore_index=True)
 
     return Schema
 
