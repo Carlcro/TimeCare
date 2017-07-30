@@ -1,0 +1,66 @@
+<data>
+  <Event>
+    <event_type>Work</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T10:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T10:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Sport</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T12:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Work</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T15:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Sport</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T13:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+</data>
+
+<!--
+<data>
+    <country name="Liechtenstein">
+        <rank>1</rank>
+        <year>2008</year>
+        <gdppc>141100</gdppc>
+        <neighbor name="Austria" direction="E"/>
+        <neighbor name="Switzerland" direction="W"/>
+    </country>
+    <country name="Singapore">
+        <rank>4</rank>
+        <year>2011</year>
+        <gdppc>59900</gdppc>
+        <neighbor name="Malaysia" direction="N"/>
+    </country>
+    <country name="Panama">
+        <rank>68</rank>
+        <year>2011</year>
+        <gdppc>13600</gdppc>
+        <neighbor name="Costa Rica" direction="W"/>
+        <neighbor name="Colombia" direction="E"/>
+    </country>
+</data> -->
