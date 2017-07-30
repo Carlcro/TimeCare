@@ -7,8 +7,9 @@ from xml.dom import minidom
 import xml.etree.ElementTree as ET
 import pandas as pd
 import datetime
-#import plotly.plotly as py
-#import plotly.figure_factory as ff
+import plotly
+import plotly.plotly as py
+import plotly.figure_factory as ff
 
 
 file_name = 'Events.xml'
@@ -60,6 +61,10 @@ def SchemaBuilder(data):
                             inserted = True
                             continue
 
+                    elif Schema.iloc[i].Type == "Friends":
+                        if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
+                            inserted = True
+
                     elif Schema.iloc[i].Type == "Sport":
                         Schema.drop(Schema.index[i])
                         Schema = Schema.append(data.iloc[num], ignore_index=True)
@@ -77,32 +82,34 @@ def SchemaBuilder(data):
 
     return Schema
 
-Schema = SchemaBuilder(df)
-print(Schema)
 
-#
-# def Visulize(self,Schema):
-# #https://plot.ly/python/gantt/
-#     for events in Schema:
-#         df[events] = [dict(Tasnk = 'event.event_type', Start = 'event.startTime', Finish = 'event.finishTime']
-#
-#         # df = [
-#         # dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
-#         # dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
-#         # dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
-#         # dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
-#         # dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
-#         # dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
-#         # dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
-#         # dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
-#         # dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
-#         # dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
-#         # ]
-#
-#     colors = dict(Work = 'rgb(46, 137, 205)',
-#               Friends = 'rgb(114, 44, 121)',
-#               Training = 'rgb(198, 47, 105)')
-#
-#     fig = ff.create_gantt(df, colors=colors, index_col='Resource', title='Daily Schedule',
-#                       show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
-#     py.iplot(fig, filename='gantt-hours-minutes', world_readable=True)
+
+
+def Visulize(Schema):
+#https://plot.ly/python/gantt/
+    #for events in Schema:
+    #    Schema[events] = [dict(Tasnk = 'Work', Start = 'StartTime', Finish = 'EndTime']
+
+        # df = [
+        # dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
+        # dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
+        # dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
+        # dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
+        # dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
+        # dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
+        # dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
+        # dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
+        # dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
+        # dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
+        # ]
+
+    colors = dict(Work = 'rgb(46, 137, 205)',
+              Friends = 'rgb(114, 44, 121)',
+              Sport = 'rgb(198, 47, 105)')
+
+    fig = ff.create_gantt(Schema, colors=colors, show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
+    py.iplot(fig, filename='gantt-hours-minutes', world_readable=True)
+
+Schema = SchemaBuilder(df)
+Visulize(Schema)
+print(Schema)
