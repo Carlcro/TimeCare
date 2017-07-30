@@ -20,6 +20,7 @@
     <time>
       <event_length>60</event_length>
       <event_startTime>2017-06-30T12:10</event_startTime>
+      <changing_time>10</changing_time>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -36,6 +37,7 @@
     <time>
       <event_length>60</event_length>
       <event_startTime>2017-06-30T13:10</event_startTime>
+      <changing_time>10</changing_time>
     </time>
     <reminder>10</reminder>
   </Event>

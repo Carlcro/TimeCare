@@ -31,6 +31,12 @@ for c in events:
     event_startTime  = datetime.datetime(year,month,day,hour,minute)
     event_endTime = event_startTime + datetime.timedelta(minutes=int(event_length))
     reminder = c.find('reminder').text
+
+    if event_type == "Sport":
+            changing_time = c.find('time/changing_time').text
+            event_startTime -= datetime.timedelta(minutes=int(changing_time))
+            event_endTime += datetime.timedelta(minutes=int(changing_time))
+
     df = df.append({'Type': event_type,'StartTime':  event_startTime,'EndTime' : event_endTime, 'Reminder':reminder}, ignore_index=True)
 
 def SchemaBuilder(data):
