@@ -33,14 +33,11 @@ for c in events:
     df = df.append({'Type': event_type,'StartTime':  event_startTime,'EndTime' : event_endTime, 'Reminder':reminder}, ignore_index=True)
 
 def SchemaBuilder(data):
-    #Create an empty dateframe to fill the events with
     Schema = pd.DataFrame(columns = ['Type','StartTime','EndTime','Reminder'])
-    #insert work into the schedule
     for num in range(data.shape[0]):
         if data.iloc[num].Type  == "Work":
             Schema = Schema.append(data.iloc[num], ignore_index=True)
 
-    #start insert other events
     for num in range(data.shape[0]):
         inserted = False
         if data.iloc[num].Type == "Friends":
@@ -74,34 +71,6 @@ def SchemaBuilder(data):
 
     Schema = Schema.sort_values(by="StartTime")
     return Schema
-
-
-
-#
-# def Visulize(Schema):
-# #https://plot.ly/python/gantt/
-#     #for events in Schema:
-#     #    Schema[events] = [dict(Tasnk = 'Work', Start = 'StartTime', Finish = 'EndTime']
-#
-#         # df = [
-#         # dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
-#         # dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
-#         # dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
-#         # dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
-#         # dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
-#         # dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
-#         # dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
-#         # dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
-#         # dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
-#         # dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
-#         # ]
-#
-#     colors = dict(Work = 'rgb(46, 137, 205)',
-#               Friends = 'rgb(114, 44, 121)',
-#               Sport = 'rgb(198, 47, 105)')
-#
-#     fig = ff.create_gantt(Schema, colors=colors, show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
-#     py.iplot(fig, filename='gantt-hours-minutes', world_readable=True)
 
 Schema = SchemaBuilder(df)
 print(Schema)
