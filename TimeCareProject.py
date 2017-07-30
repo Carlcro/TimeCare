@@ -1,9 +1,4 @@
-''' en placemark för varje event
-
-events: arbete, underhållning, sportakrivitet
-'''
 import os
-from xml.dom import minidom
 import xml.etree.ElementTree as ET
 import pandas as pd
 import datetime
@@ -11,7 +6,6 @@ import datetime
 
 
 file_name = 'Events.xml'
-
 full_file =os.path.abspath(os.path.join('data',file_name))
 
 tree = ET.parse(full_file)
@@ -47,13 +41,12 @@ def SchemaBuilder(data):
             Schema = Schema.append(data.iloc[num], ignore_index=True)
 
     #start insert other events
-    print(Schema)
     for num in range(data.shape[0]):
         inserted = False
         if data.iloc[num].Type == "Friends":
             print(data.iloc[num].Type)
             for i in range(Schema.shape[0]):
-                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
+                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime  and  data.iloc[num].StartTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
                     if Schema.iloc[i].Type== "Work":
                         if Schema.iloc[i].EndTime < data.iloc[num].EndTime:
                             print(Schema.iloc[i].EndTime)
@@ -63,14 +56,12 @@ def SchemaBuilder(data):
                             continue
 
                     elif Schema.iloc[i].Type == "Friends":
-                        if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].EndTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
                             inserted = True
 
                     elif Schema.iloc[i].Type == "Sport":
                         Schema.drop(Schema.index[i])
                         Schema = Schema.append(data.iloc[num], ignore_index=True)
                         inserted = True
-
                         continue
 
         elif data.iloc[num].Type == "Sport" or data.iloc[num].Type == "Work":
