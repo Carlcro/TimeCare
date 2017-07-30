@@ -12,6 +12,7 @@ tree = ET.parse(full_file)
 events = tree.findall('Event')
 df = pd.DataFrame(columns = ['Type','StartTime','EndTime','Reminder'])
 
+#Parse input and create a DataFrame with all events
 for c in events:
     event_type = c.find('event_type').text
     event_length = c.find('time/event_length').text
@@ -35,15 +36,17 @@ for c in events:
 
 def SchemaBuilder(data):
     Schema = pd.DataFrame(columns = ['Type','StartTime','EndTime','Reminder'])
+    #insert work into Schdule
     for num in range(data.shape[0]):
         if data.iloc[num].Type  == "Work":
             Schema = Schema.append(data.iloc[num], ignore_index=True)
 
+    #inserts all other events
     for num in range(data.shape[0]):
         inserted = False
         if data.iloc[num].Type == "Friends":
             for i in range(Schema.shape[0]):
-                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime  and  data.iloc[num].StartTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
+                if data.iloc[num].StartTime >= Schema.iloc[i].StartTime  and  data.iloc[num].StartTime <= Schema.iloc[i].EndTime :
                     if Schema.iloc[i].Type== "Work":
                         if Schema.iloc[i].EndTime < data.iloc[num].EndTime:
                             data.set_value(num,'StartTime',Schema.iloc[i].EndTime)
@@ -60,9 +63,20 @@ def SchemaBuilder(data):
                         Schema = Schema.append(data.iloc[num], ignore_index=True)
                         inserted = True
 
+                if data.iloc[num].EndTime >= Schema.iloc[i].StartTime  and  data.iloc[num].EndTime <= Schema.iloc[i].EndTime:
+                    if Schema.iloc[i].Type== "Work" or Schema.iloc[i].Type== "Friends" :
+                        inserted = True
+
+                    elif Schema.iloc[i].Type == "Sport":
+                        Schema.drop(Schema.index[i])
+                        Schema = Schema.append(data.iloc[num], ignore_index=True)
+                        inserted = True
+
         elif data.iloc[num].Type == "Sport" or data.iloc[num].Type == "Work":
             for i in range(Schema.shape[0]):
                 if data.iloc[num].StartTime >= Schema.iloc[i].StartTime and data.iloc[num].StartTime <= Schema.iloc[i].EndTime: #chec if time slot is occupied
+                    inserted = True
+                if data.iloc[num].EndTime >= Schema.iloc[i].StartTime  and  data.iloc[num].EndTime <= Schema.iloc[i].EndTime:
                     inserted = True
 
         if inserted == False:
