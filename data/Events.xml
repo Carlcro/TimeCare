@@ -8,10 +8,34 @@
     <reminder>10</reminder>
   </Event>
   <Event>
-    <event_type>Work</event_type>
+    <event_type>Friends</event_type>
     <time>
-      <event_length>300</event_length>
-      <event_startTime>2017-07-01T08:10</event_startTime>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T07:30</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
+      <event_length>120</event_length>
+      <event_startTime>2017-06-30T15:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
+      <event_length>60</event_length>
+      <event_startTime>2017-06-30T11:00</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
+      <event_length>700</event_length>
+      <event_startTime>2017-06-30T07:10</event_startTime>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -26,7 +50,7 @@
   <Event>
     <event_type>Work</event_type>
     <time>
-      <event_length>500</event_length>
+      <event_length>600</event_length>
       <event_startTime>2017-07-03T08:10</event_startTime>
     </time>
     <reminder>10</reminder>
@@ -74,8 +98,17 @@
   <Event>
     <event_type>Work</event_type>
     <time>
-      <event_length>480</event_length>
+      <event_length>400</event_length>
       <event_startTime>2017-07-09T08:10</event_startTime>
+    </time>
+    <reminder>10</reminder>
+  </Event>
+
+  <Event>
+    <event_type>Friends</event_type>
+    <time>
+      <event_length>50</event_length>
+      <event_startTime>2017-07-09T07:10</event_startTime>
     </time>
     <reminder>10</reminder>
   </Event>
@@ -88,7 +121,6 @@
     </time>
     <reminder>10</reminder>
   </Event>
-
 
   <Event>
     <event_type>Friends</event_type>
